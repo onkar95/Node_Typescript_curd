@@ -30,6 +30,9 @@ router.use((req, res, next) => {
     next();
 });
 /** Routes */
+router.get('/', (req, res) => {
+    res.json("hello world");
+});
 router.use('/product', productRoutes_1.default);
 /** Error handling */
 router.use((req, res, next) => {
