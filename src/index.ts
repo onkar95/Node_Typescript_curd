@@ -33,6 +33,9 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
+router.use('/', (req, res) => {
+    res.json("hello world")
+});
 router.use('/product', productRoutes);
 
 
