@@ -71,7 +71,7 @@ const updateProduct = (req: Request, res: Response, next: NextFunction) => {
                     .then((updatedProduct) => res.status(201).json({ updatedProduct }))
                     .catch((error) => res.status(500).json({ error }));
             } else {
-                return res.status(404).json({ message: 'not found' });
+                return res.status(404).json({ message: 'product not found' });
             }
         })
         .catch((error) => res.status(500).json({ error }));
@@ -81,7 +81,7 @@ const deleteProduct = (req: Request, res: Response, next: NextFunction) => {
     const productId = req.params.productId;
 
     return Product.findByIdAndDelete(productId)
-        .then((product) => (product ? res.status(201).json({ product, message: 'Deleted' }) : res.status(404).json({ message: 'not found' })))
+        .then((product) => (product ? res.status(201).json({ product, message: 'Deleted' }) : res.status(404).json({ message: 'product not found please check the id' })))
         .catch((error) => res.status(500).json({ error }));
 };
 
