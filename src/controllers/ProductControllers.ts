@@ -27,9 +27,9 @@ const createProduct = async (req: Request, res: Response, next: NextFunction) =>
             createdAt,
             updatedAt
         });
-        const product_1 = await product
+        const newProduct = await product
             .save();
-        return res.status(201).json({ product_1 });
+        return res.status(201).json({ newProduct });
     } catch (error) {
         return res.status(500).json({ error });
     }
@@ -68,7 +68,7 @@ const updateProduct = (req: Request, res: Response, next: NextFunction) => {
 
                 return product
                     .save()
-                    .then((product) => res.status(201).json({ product }))
+                    .then((updatedProduct) => res.status(201).json({ updatedProduct }))
                     .catch((error) => res.status(500).json({ error }));
             } else {
                 return res.status(404).json({ message: 'not found' });

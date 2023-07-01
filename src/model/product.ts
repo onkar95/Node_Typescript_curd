@@ -2,11 +2,11 @@ import { timeStamp } from 'console';
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface Product extends Document {
-    productName: String,
-    productDescription: String,
-    price: Number,
-    category: String,
-    stockQuantity: Number,
+    productName: string,
+    productDescription: string,
+    price: number,
+    category: string,
+    stockQuantity: number,
     createdAt: Date,
     updatedAt: Date
 }
