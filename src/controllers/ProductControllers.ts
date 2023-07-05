@@ -2,7 +2,7 @@
 
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import Product from '../model/product';
+import Product, { IProduct } from '../model/product';
 
 const createProduct = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -30,6 +30,39 @@ const createProduct = async (req: Request, res: Response, next: NextFunction) =>
         const newProduct = await product
             .save();
         return res.status(201).json({ newProduct });
+    } catch (error) {
+        return res.status(500).json({ error });
+    }
+
+
+};
+const createMultipleProduct = async (req: Request, res: Response, next: NextFunction) => {
+
+    try {
+
+
+        const productObj = req.body
+
+        const savedResponse: IProduct[] = [];
+
+        productObj.forEach((element: IProduct) => {
+            console.log(element)
+            const product = new Product({
+                _id: new mongoose.Types.ObjectId(),
+                productName: element.productName,
+                productDescription: element.productDescription,
+                price: element.price,
+                category: element.category,
+                stockQuantity: element.stockQuantity,
+            })
+            product.save()
+            savedResponse.push(product)
+        });
+
+
+        // const newProduct = await product
+        //     .save();
+        return res.status(201).json(savedResponse);
     } catch (error) {
         return res.status(500).json({ error });
     }
@@ -85,4 +118,4 @@ const deleteProduct = (req: Request, res: Response, next: NextFunction) => {
         .catch((error) => res.status(500).json({ error }));
 };
 
-export default { createProduct, readproduct, readAll, updateProduct, deleteProduct };
+export default { createProduct, createMultipleProduct, readproduct, readAll, updateProduct, deleteProduct };

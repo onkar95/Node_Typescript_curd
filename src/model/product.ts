@@ -1,7 +1,7 @@
 import { timeStamp } from 'console';
 import mongoose, { Document, Schema } from 'mongoose';
 
-export interface Product extends Document {
+export interface IProduct extends Document {
     productName: string,
     productDescription: string,
     price: number,
@@ -27,4 +27,4 @@ const ProductSchema: Schema = new Schema(
     }
 );
 
-export default mongoose.model<Product>('Product', ProductSchema);
+export default mongoose.model<IProduct>('Product', ProductSchema);
